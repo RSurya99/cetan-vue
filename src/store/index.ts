@@ -1,5 +1,8 @@
 import { createStore } from 'vuex'
 import VuexPersist from 'vuex-persist'
+import auth from './modules/auth'
+import room from './modules/room'
+import chat from './modules/chat'
 
 const vuexPersist = new VuexPersist({
   key: 'cetan',
@@ -7,7 +10,11 @@ const vuexPersist = new VuexPersist({
 })
 
 const store = createStore({
-  modules: {},
+  modules: {
+    auth,
+    room,
+    chat,
+  },
   plugins: [vuexPersist.plugin],
 })
 
