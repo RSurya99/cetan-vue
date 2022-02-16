@@ -1,0 +1,23 @@
+<script setup lang="ts">
+const props = defineProps({
+  message: {
+    type: String,
+    required: true,
+  },
+})
+const emit = defineEmits(['update:message'])
+const chatInput = (event) => {
+  emit('update:message', event.target.value)
+}
+</script>
+<template>
+  <div class="w-full">
+    <input
+      type="text"
+      class="focus:outline-none focus:ring-0 block w-full p-2 border border-gray-300 rounded-md"
+      placeholder="Type a message"
+      :value="props.message"
+      @input="chatInput"
+    />
+  </div>
+</template>
