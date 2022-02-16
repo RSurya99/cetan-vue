@@ -4,6 +4,7 @@ import router from './router'
 import store from './store'
 
 // css
+import './assets/css/app.scss'
 import './assets/css/vendor.css'
 import 'nprogress/nprogress.css'
 
