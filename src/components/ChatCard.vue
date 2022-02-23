@@ -31,7 +31,7 @@ const roomClick = function () {
       <img src="https://randomuser.me/api/portraits/men/59.jpg" class="w-12 h-12 rounded-md" alt="" />
       <div class="w-full">
         <div class="w-full flex items-center justify-between">
-          <h3 class="font-semibold text-gray-700">{{ props.room.opponent.name }}</h3>
+          <h3 class="font-semibold text-gray-700">{{ props.room.opponent.name.substring(0, 15) }}</h3>
           <span class="text-xs text-gray-700">{{ props.room.messages.at(-1).created_at }}</span>
         </div>
         <p class="text-left text-sm font-thin text-gray-500">{{ props.room.messages.at(-1).message }}</p>

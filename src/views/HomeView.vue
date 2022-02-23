@@ -7,6 +7,8 @@ const store = useStore()
 
 const room = computed(() => store.getters['room/selectedRoom'])
 const userId = computed(() => store.getters['auth/user'].id)
+const testId = ref(true)
+const roomId = ref(0)
 
 const message = ref('')
 const sendMessage = function () {
@@ -24,21 +26,19 @@ const sendMessage = function () {
     })
 }
 
-const getRoom = function (id) {
-  if (id) {
-    store.dispatch('room/getRoomEvent', room.value.room_id)
-  }
-}
-
 onMounted(() => {
   const chatBox = document.getElementById('chat-box')
   chatBox?.scrollTo(0, chatBox.scrollHeight || document.documentElement.scrollHeight)
   if (typeof window !== 'undefined') {
     window.Echo.channel('Cetan-app').listen('.message-notification', (e) => {
-      if (e && e != undefined) {
-        if (e.to === room.value.self?.id && e.room === room.value.room_id) {
-          getRoom(e.id)
-          chatBox?.scrollTo(0, chatBox.scrollHeight || document.documentElement.scrollHeight)
+      if (testId.value) {
+        roomId.value = e.id
+        store.dispatch('room/getRoomEvent', room.value.room_id)
+        testId.value = false
+        chatBox?.scrollTo(0, chatBox.scrollHeight || document.documentElement.scrollHeight)
+      } else {
+        if (roomId.value != e.id) {
+          testId.value = true
         }
       }
     })
