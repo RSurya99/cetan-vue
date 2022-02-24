@@ -27,6 +27,7 @@ const sendMessage = function () {
 }
 
 onMounted(() => {
+  store.dispatch('room/getRoomEvent', room.value.room_id)
   const chatBox = document.getElementById('chat-box')
   chatBox?.scrollTo(0, chatBox.scrollHeight || document.documentElement.scrollHeight)
   if (typeof window !== 'undefined') {

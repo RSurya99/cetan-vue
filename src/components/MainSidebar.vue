@@ -1,29 +1,27 @@
 <script setup lang="ts">
-import { onMounted, computed } from 'vue'
+import { onMounted, computed, ref } from 'vue'
 import { useStore } from 'vuex'
 
 const store = useStore()
 
 const rooms = computed(() => store.getters['room/rooms'])
 const room = computed(() => store.getters['room/selectedRoom'])
+const testId = ref(true)
+const roomId = ref(0)
 
 onMounted(() => {
   store.dispatch('room/getRoomsEvent').catch((err) => {
     console.log(err, 'terjadi kesalahan ketika fetch')
   })
 
-  const getAllRoom = function (id) {
-    if (id) {
-      store.dispatch('room/getRoomsEvent', room.value.room_id)
-    }
-  }
-
   window.Echo.channel('Cetan-app').listen('.message-notification', (e) => {
-    if (e && e != undefined) {
-      if (rooms.value.length > 0) {
-        if (e.to === rooms.value[0].self.id || e.rooms === Number(room.value.room_id)) {
-          getAllRoom(e.id)
-        }
+    if (testId.value) {
+      roomId.value = e.id
+      store.dispatch('room/getRoomsEvent', room.value.room_id)
+      testId.value = false
+    } else {
+      if (roomId.value != e.id) {
+        testId.value = true
       }
     }
   })
