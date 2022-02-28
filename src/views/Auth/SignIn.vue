@@ -9,6 +9,20 @@ const password = ref('')
 const isEyeClicked = ref(false)
 const errors = ref([] as ErrorMessage[])
 
+const validateEmail = function (email) {
+  return String(email)
+    .toLowerCase()
+    .match(
+      /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+    )
+}
+
+const validateStringAndNumber = function (el) {
+  return String(el)
+    .toLowerCase()
+    .match(/^(?:[0-9]+[a-z]|[a-z]+[0-9])[a-z0-9]*$/i)
+}
+
 const formSubmit = function () {
   errors.value = []
   if (email.value === '' || password.value === '') {
@@ -17,7 +31,7 @@ const formSubmit = function () {
         ...errors.value,
         {
           field: 'email',
-          message: 'Email is required',
+          message: 'Email field is required',
         },
       ]
     }
@@ -26,7 +40,33 @@ const formSubmit = function () {
         ...errors.value,
         {
           field: 'password',
-          message: 'Password is required',
+          message: 'Password field is required',
+        },
+      ]
+    }
+  } else if (validateEmail(email.value) === null) {
+    errors.value = [
+      ...errors.value,
+      {
+        field: 'email',
+        message: 'Email is not valid',
+      },
+    ]
+  } else if (password.value.length < 6 || validateStringAndNumber(password.value) === null) {
+    if (password.value.length < 6) {
+      errors.value = [
+        ...errors.value,
+        {
+          field: 'password',
+          message: 'Password must be at least 6 characters',
+        },
+      ]
+    } else if (validateStringAndNumber(password.value) === null) {
+      errors.value = [
+        ...errors.value,
+        {
+          field: 'password',
+          message: 'Password must contain at least one number and one letter',
         },
       ]
     }
@@ -41,12 +81,15 @@ const formSubmit = function () {
 </script>
 <template>
   <section
-    class="w-full h-full bg-gradient-to-r from-green-500 to-emerald-500 flex flex-col items-center justify-center"
+    class="w-full h-full sm:min-h-screen bg-gradient-to-r from-green-500 to-emerald-500 flex flex-col items-center justify-center"
   >
     <div
-      class="flex flex-col items-center justify-center sm:m-10 px-8 sm:px-14 py-20 sm:py-8 bg-white shadow-xl sm:rounded-xl w-full sm:max-w-[550px]"
+      class="flex flex-col items-center justify-center sm:my-10 px-8 sm:px-14 py-20 sm:py-8 bg-white shadow-xl sm:rounded-xl w-full sm:max-w-[550px]"
     >
-      <h2 class="text-3xl font-bold text-gray-700">Welcome back 👋</h2>
+      <h1 class="text-4xl font-bold text-emerald-500">Cetan 👋</h1>
+      <p class="text-gray-500 font-medium leading-relaxed mt-2">
+        Please login first before using this app
+      </p>
       <form @submit.prevent="formSubmit" class="w-full mt-6">
         <div class="flex flex-col">
           <label for="email" class="text-sm text-gray-500 font-medium mb-1">Email</label>
@@ -124,10 +167,10 @@ const formSubmit = function () {
       </div>
       <span class="text-sm text-gray-500 font-medium mt-6"
         >Don't have an account yet?
-        <a href="#" class="underline hover:text-gray-600 transition duration-300"
-          >Register now</a
-        ></span
-      >
+        <RouterLink to="/register" class="underline hover:text-gray-600 transition duration-300">
+          Register now
+        </RouterLink>
+      </span>
     </div>
   </section>
 </template>
