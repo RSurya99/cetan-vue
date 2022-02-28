@@ -5,13 +5,8 @@
 declare module 'vue' {
   export interface GlobalComponents {
     HelloWorld: typeof import('./components/HelloWorld.vue')['default']
-    IconLogosFacebook: typeof import('~icons/logos/facebook')['default']
-    IconLogosGithubIcon: typeof import('~icons/logos/github-icon')['default']
-    IconLogosGoogleIcon: typeof import('~icons/logos/google-icon')['default']
-    IconMdiBrightness6: typeof import('~icons/mdi/brightness6')['default']
-    IconMdiEye: typeof import('~icons/mdi/eye')['default']
-    IconMdiEyeOff: typeof import('~icons/mdi/eye-off')['default']
-    IconMdiPlusCircle: typeof import('~icons/mdi/plus-circle')['default']
+    IconMdiCheck: typeof import('~icons/mdi/check')['default']
+    IconMdiMagnify: typeof import('~icons/mdi/magnify')['default']
   }
 }
 
