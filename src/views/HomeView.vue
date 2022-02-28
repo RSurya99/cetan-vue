@@ -14,7 +14,6 @@ const increment = () => counterStore.increment()
     <header>
       <nav>
         <RouterLink to="/">Home</RouterLink>
-        <RouterLink to="/about">About</RouterLink>
       </nav>
     </header>
     <h1 class="text-gray-700 dark:text-indigo-500">This is home page</h1>
