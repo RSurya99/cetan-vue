@@ -29,6 +29,10 @@ let filteredPeople = computed(() =>
           .includes(query.value.toLowerCase().replace(/\s+/g, ''))
       )
 )
+const message = ref('')
+const sendMessage = function () {
+  alert('oke')
+}
 </script>
 <template>
   <div class="w-full max-h-screen overflow-hidden">
@@ -126,7 +130,58 @@ let filteredPeople = computed(() =>
           </button>
         </div>
       </div>
-      <div class="col-span-6 px-6 py-4">this is 6 col</div>
+      <div class="col-span-6">
+        <div class="w-full border-b border-gray-300 px-4 py-2 flex items-center justify-between">
+          <div class="flex items-center space-x-2">
+            <img
+              src="https://randomuser.me/api/portraits/men/60.jpg"
+              class="w-12 h-12 rounded-full"
+            />
+            <div class="flex flex-col">
+              <h4 class="font-semibold text-gray-700">Ochi</h4>
+              <span class="text-xs text-gray-500">Aktif 4 jam lalu</span>
+            </div>
+          </div>
+          <div>
+            <button class="p-2 bg-gray-200 rounded-full shadow-sm">
+              <IconMdiDotsHorizontal class="text-gray-500" aria-hidden="true" />
+            </button>
+          </div>
+        </div>
+
+        <!-- Section ChatBox -->
+        <section
+          id="chat-box"
+          class="relative w-full h-[80vh] bg-gray-100 p-4 space-y-2 overflow-auto"
+        >
+          <div
+            v-for="i in 18"
+            :key="i"
+            :class="[i % 2 === 0 ? 'justify-start' : 'justify-end']"
+            class="w-full flex"
+          >
+            <div class="inline-block px-4 py-2 bg-white rounded-full shadow \">
+              <p class="text-gray-700 leading-tight">Halo guys</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- Section AddChat -->
+        <section class="w-full h-[10%] px-4 py-2 flex items-center justify-between space-x-4">
+          <button>
+            <IconMdiEmoticon class="text-gray-500 text-xl" />
+          </button>
+          <button>
+            <IconMdiPaperclip class="text-gray-500 text-xl" />
+          </button>
+          <form @submit.prevent="sendMessage" class="w-full flex items-center space-x-4">
+            <ChatMessageInput :message="message" @update:message="message = $event" />
+            <button type="submit">
+              <IconMdiSend class="text-gray-500 text-xl" />
+            </button>
+          </form>
+        </section>
+      </div>
       <div class="col-span-3 px-6 py-4">this is 3 col</div>
     </div>
   </div>

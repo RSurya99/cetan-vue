@@ -4,9 +4,18 @@
 
 declare module 'vue' {
   export interface GlobalComponents {
+    ChatMessageInput: typeof import('./components/ChatMessageInput.vue')['default']
     HelloWorld: typeof import('./components/HelloWorld.vue')['default']
+    IconHeroiconsOutlineEmojiHappy: typeof import('~icons/heroicons-outline/emoji-happy')['default']
+    IconHeroiconsOutlinePaperClip: typeof import('~icons/heroicons-outline/paper-clip')['default']
     IconMdiCheck: typeof import('~icons/mdi/check')['default']
+    IconMdiDotsHorizontal: typeof import('~icons/mdi/dots-horizontal')['default']
+    IconMdiDotsVertical: typeof import('~icons/mdi/dots-vertical')['default']
+    IconMdiEmoticon: typeof import('~icons/mdi/emoticon')['default']
     IconMdiMagnify: typeof import('~icons/mdi/magnify')['default']
+    IconMdiPa: typeof import('~icons/mdi/pa')['default']
+    IconMdiPaperclip: typeof import('~icons/mdi/paperclip')['default']
+    IconMdiSend: typeof import('~icons/mdi/send')['default']
   }
 }
 
