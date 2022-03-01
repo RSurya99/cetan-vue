@@ -54,9 +54,12 @@ const profileMenu = ref(false)
           <div class="relative">
             <button
               @click="profileMenu = !profileMenu"
-              class="p-2 bg-gray-200 rounded-full shadow-sm"
+              class="p-2 bg-gray-200 group hover:bg-emerald-300 rounded-full shadow-sm transition duration-300"
             >
-              <IconMdiDotsHorizontal class="text-gray-500 text-sm" aria-hidden="true" />
+              <IconMdiDotsHorizontal
+                class="text-gray-500 group-hover:text-white text-sm"
+                aria-hidden="true"
+              />
             </button>
             <div
               v-if="profileMenu"
@@ -92,7 +95,7 @@ const profileMenu = ref(false)
                   @change="query = $event.target.value"
                 />
                 <ComboboxButton class="absolute inset-y-0 right-0 flex items-center pr-2">
-                  <IconMdiMagnify class="w-5 h-5 text-gray-400" aria-hidden="true" />
+                  <IconMdiMagnify class="w-5 h-5 text-emerald-500" aria-hidden="true" />
                 </ComboboxButton>
               </div>
               <TransitionRoot
@@ -145,12 +148,12 @@ const profileMenu = ref(false)
             </div>
           </Combobox>
         </div>
-        <div class="h-[78vh] mt-6 space-y-2 overflow-auto px-2">
+        <div class="h-[78vh] mt-6 space-y-2 overflow-auto">
           <button
             v-for="i in 12"
             :key="i"
             type="button"
-            class="w-full flex items-center space-x-4 p-2 text-left hover:bg-gray-100 rounded-md hover:shadow-sm transition duration-300"
+            class="w-full flex items-center space-x-4 px-4 py-2 text-left hover:bg-emerald-100 rounded-md hover:shadow-sm transition duration-300"
           >
             <img
               src="https://randomuser.me/api/portraits/men/60.jpg"
@@ -179,8 +182,14 @@ const profileMenu = ref(false)
             </div>
           </div>
           <div>
-            <button @click="sideInfo = !sideInfo" class="p-2 bg-gray-200 rounded-full shadow-sm">
-              <IconMdiDotsHorizontal class="text-gray-500" aria-hidden="true" />
+            <button
+              @click="sideInfo = !sideInfo"
+              class="p-2 bg-gray-200 group hover:bg-emerald-300 rounded-full shadow-sm transition duration-300"
+            >
+              <IconMdiDotsHorizontal
+                class="text-gray-500 group-hover:text-white"
+                aria-hidden="true"
+              />
             </button>
           </div>
         </div>
@@ -196,8 +205,16 @@ const profileMenu = ref(false)
             :class="[i % 2 === 0 ? 'justify-start' : 'justify-end']"
             class="w-full flex"
           >
-            <div class="inline-block px-4 py-2 bg-white rounded-full shadow \">
-              <p class="text-gray-700 leading-tight">Halo guys</p>
+            <div class="relative group cursor-default">
+              <div
+                :class="[i % 2 === 0 ? 'left-28' : 'right-28']"
+                class="absolute top-[0.4rem] w-full hidden group-hover:block bg-gray-500 py-1 text-center text-white text-xs backdrop-blur rounded-md shadow"
+              >
+                2 weeks ago
+              </div>
+              <div class="inline-block px-4 py-2 bg-white rounded-full shadow">
+                <p class="text-gray-700 leading-tight">Halo guys</p>
+              </div>
             </div>
           </div>
         </section>
@@ -211,16 +228,16 @@ const profileMenu = ref(false)
               Add emoji
             </div>
             <button>
-              <IconMdiEmoticonOutline class="text-gray-500 text-xl" />
+              <IconMdiEmoticonOutline class="text-emerald-500 text-xl" />
             </button>
           </div>
           <button>
-            <IconMdiPaperclip class="text-gray-500 text-xl" />
+            <IconMdiPaperclip class="text-emerald-500 text-xl" />
           </button>
           <form @submit.prevent="sendMessage" class="w-full flex items-center space-x-4">
             <ChatMessageInput :message="message" @update:message="message = $event" />
             <button type="submit">
-              <IconMdiSend class="text-gray-500 text-xl" />
+              <IconMdiSend class="text-emerald-500 text-xl" />
             </button>
           </form>
         </section>
