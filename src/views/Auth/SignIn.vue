@@ -1,14 +1,10 @@
 <script setup lang="ts">
 import { useAuthStore } from '@/stores/auth'
 import NProgress from 'nprogress'
+import { ErrorMessage } from '@/types'
 
 const authStore = useAuthStore()
 const router = useRouter()
-
-interface ErrorMessage {
-  field: string
-  message: string
-}
 
 const email = ref('')
 const password = ref('')
@@ -68,7 +64,6 @@ const formSubmit = function () {
     authStore
       .loginEvent({ email: email.value, password: password.value })
       .then(() => {
-        alert('login berhasil')
         router.push('/')
       })
       .catch((err) => {

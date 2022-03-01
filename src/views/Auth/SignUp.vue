@@ -1,14 +1,10 @@
 <script setup lang="ts">
 import { useAuthStore } from '@/stores/auth'
 import NProgress from 'nprogress'
+import { ErrorMessage } from '@/types'
 
 const authStore = useAuthStore()
 const router = useRouter()
-
-interface ErrorMessage {
-  field: string
-  message: string
-}
 
 const name = ref('')
 const email = ref('')
@@ -82,7 +78,6 @@ const formSubmit = function () {
         password: password.value,
       })
       .then(() => {
-        alert('berhasil register')
         router.push('/login')
       })
       .catch(() => {

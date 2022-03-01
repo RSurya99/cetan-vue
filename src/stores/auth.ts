@@ -13,6 +13,7 @@ export const useAuthStore = defineStore({
     loginEvent(payload) {
       return ApiService.apiLogin(payload)
         .then((response) => {
+          this.user = response.data.data
           localStorage.setItem('user', JSON.stringify(response.data.data))
         })
         .catch((error) => {
