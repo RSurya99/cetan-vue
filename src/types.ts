@@ -1,6 +1,4 @@
-interface ErrorMessage {
+export interface ErrorMessage {
   field: string
   message: string
 }
-
-export { ErrorMessage }

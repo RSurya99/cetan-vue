@@ -1,74 +1,17 @@
 <script setup lang="ts">
 import { useAuthStore } from '@/stores/auth'
 import NProgress from 'nprogress'
-import { ErrorMessage } from '@/types'
+import useAuthValidation from '@/composables/authValidation'
+
+const { errors, email, password, name, validate } = useAuthValidation()
 
 const authStore = useAuthStore()
 const router = useRouter()
 
-const name = ref('')
-const email = ref('')
-const password = ref('')
 const isEyeClicked = ref(false)
-const errors = ref([] as ErrorMessage[])
-
-const validateEmail = function (email) {
-  return String(email)
-    .toLowerCase()
-    .match(
-      /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-    )
-}
 
 const formSubmit = function () {
-  errors.value = []
-  if (email.value === '' || password.value === '' || name.value === '') {
-    if (email.value === '') {
-      errors.value = [
-        ...errors.value,
-        {
-          field: 'email',
-          message: 'Email field is required',
-        },
-      ]
-    }
-    if (password.value === '') {
-      errors.value = [
-        ...errors.value,
-        {
-          field: 'password',
-          message: 'Password field is required',
-        },
-      ]
-    }
-    if (name.value === '') {
-      errors.value = [
-        ...errors.value,
-        {
-          field: 'name',
-          message: 'Name field is required',
-        },
-      ]
-    }
-  } else if (validateEmail(email.value) === null) {
-    errors.value = [
-      ...errors.value,
-      {
-        field: 'email',
-        message: 'Email is not valid',
-      },
-    ]
-  } else if (password.value.length < 6) {
-    errors.value = [
-      ...errors.value,
-      {
-        field: 'password',
-        message: 'Password must be at least 6 characters',
-      },
-    ]
-  } else {
-    errors.value = []
-  }
+  validate('signUp')
 
   if (errors.value.length === 0) {
     authStore
