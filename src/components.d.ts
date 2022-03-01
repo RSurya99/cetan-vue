@@ -6,9 +6,12 @@ declare module 'vue' {
   export interface GlobalComponents {
     BuilderAuthBaseFooter: typeof import('./components/Builder/Auth/BaseFooter.vue')['default']
     BuilderAuthBaseHeader: typeof import('./components/Builder/Auth/BaseHeader.vue')['default']
+    BuilderBaseButton: typeof import('./components/Builder/BaseButton.vue')['default']
     BuilderBaseFooter: typeof import('./components/Builder/BaseFooter.vue')['default']
     BuilderBaseHeader: typeof import('./components/Builder/BaseHeader.vue')['default']
     ChatMessageInput: typeof import('./components/ChatMessageInput.vue')['default']
+    FormInput: typeof import('./components/Form/Input.vue')['default']
+    FormWrapper: typeof import('./components/Form/Wrapper.vue')['default']
     HelloWorld: typeof import('./components/HelloWorld.vue')['default']
     IconLogosFacebook: typeof import('~icons/logos/facebook')['default']
     IconLogosGithubIcon: typeof import('~icons/logos/github-icon')['default']
