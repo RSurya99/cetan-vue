@@ -14,7 +14,7 @@ const chatInput = (event) => {
   <div class="w-full">
     <input
       type="text"
-      class="focus:outline-none focus:ring-0 block w-full p-2 border border-gray-300 rounded-md"
+      class="focus:outline-none focus:ring-0 block w-full px-4 py-2 border border-gray-300 rounded-md"
       placeholder="Type a message"
       :value="props.message"
       @input="chatInput"

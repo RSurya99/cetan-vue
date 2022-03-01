@@ -6,6 +6,9 @@ import {
   ComboboxOptions,
   ComboboxOption,
   TransitionRoot,
+  Disclosure,
+  DisclosureButton,
+  DisclosurePanel,
 } from '@headlessui/vue'
 
 const people = [
@@ -33,17 +36,50 @@ const message = ref('')
 const sendMessage = function () {
   alert('oke')
 }
+const sideInfo = ref(true)
+const profileMenu = ref(false)
 </script>
 <template>
   <div class="w-full max-h-screen overflow-hidden">
     <div class="grid grid-cols-12 divide-x divide-gray-300">
       <div class="col-span-3 px-2 py-4">
-        <div class="flex items-center space-x-4 px-2">
-          <img
-            src="https://randomuser.me/api/portraits/men/60.jpg"
-            class="w-10 h-10 rounded-full"
-          />
-          <h2 class="text-2xl font-bold text-gray-700 dark:text-white">Chat</h2>
+        <div class="w-full flex items-center justify-between">
+          <div class="flex items-center space-x-4 px-2">
+            <img
+              src="https://randomuser.me/api/portraits/men/60.jpg"
+              class="w-10 h-10 rounded-full"
+            />
+            <h2 class="text-2xl font-bold text-gray-700 dark:text-white">Chats</h2>
+          </div>
+          <div class="relative">
+            <button
+              @click="profileMenu = !profileMenu"
+              class="p-2 bg-gray-200 rounded-full shadow-sm"
+            >
+              <IconMdiDotsHorizontal class="text-gray-500 text-sm" aria-hidden="true" />
+            </button>
+            <div
+              v-if="profileMenu"
+              class="absolute -left-24 w-32 z-10 py-1 bg-white rounded-md shadow-md"
+            >
+              <ul>
+                <li>
+                  <button
+                    class="w-full text-left text-sm text-gray-700 font-medium px-4 py-2 hover:bg-emerald-100"
+                  >
+                    Settings
+                  </button>
+                </li>
+                <li>
+                  <button
+                    class="w-full text-left text-sm text-gray-700 font-medium px-4 py-2 hover:bg-emerald-100"
+                  >
+                    Logout
+                  </button>
+                </li>
+              </ul>
+            </div>
+          </div>
         </div>
         <div class="w-full mt-4 px-2">
           <Combobox v-model="selected">
@@ -130,7 +166,7 @@ const sendMessage = function () {
           </button>
         </div>
       </div>
-      <div class="col-span-6">
+      <div :class="[sideInfo ? 'col-span-6' : 'col-span-9']">
         <div class="w-full border-b border-gray-300 px-4 py-2 flex items-center justify-between">
           <div class="flex items-center space-x-2">
             <img
@@ -143,7 +179,7 @@ const sendMessage = function () {
             </div>
           </div>
           <div>
-            <button class="p-2 bg-gray-200 rounded-full shadow-sm">
+            <button @click="sideInfo = !sideInfo" class="p-2 bg-gray-200 rounded-full shadow-sm">
               <IconMdiDotsHorizontal class="text-gray-500" aria-hidden="true" />
             </button>
           </div>
@@ -168,9 +204,16 @@ const sendMessage = function () {
 
         <!-- Section AddChat -->
         <section class="w-full h-[10%] px-4 py-2 flex items-center justify-between space-x-4">
-          <button>
-            <IconMdiEmoticon class="text-gray-500 text-xl" />
-          </button>
+          <div class="relative group">
+            <div
+              class="absolute -top-8 -left-8 w-24 hidden bg-gray-600 backdrop-blur rounded-md shadow-md text-center text-xs font-medium text-white p-2 group-hover:hidden transition-all duration-300"
+            >
+              Add emoji
+            </div>
+            <button>
+              <IconMdiEmoticonOutline class="text-gray-500 text-xl" />
+            </button>
+          </div>
           <button>
             <IconMdiPaperclip class="text-gray-500 text-xl" />
           </button>
@@ -182,7 +225,80 @@ const sendMessage = function () {
           </form>
         </section>
       </div>
-      <div class="col-span-3 px-6 py-4">this is 3 col</div>
+      <div v-if="sideInfo" class="col-span-3 px-4 py-8 flex flex-col items-center">
+        <img src="https://randomuser.me/api/portraits/men/60.jpg" class="w-20 h-20 rounded-full" />
+        <h4 class="text-lg font-semibold text-gray-700">Adam Ananta</h4>
+        <div class="w-full pt-4">
+          <div class="w-full max-w-md p-2 mx-auto bg-white rounded-2xl">
+            <Disclosure v-slot="{ open }">
+              <DisclosureButton
+                class="flex justify-between w-full px-4 py-2 text-sm font-medium text-left text-gray-700 rounded-lg hover:bg-gray-100 focus:outline-none focus-visible:ring focus-visible:ring-emerald-500 focus-visible:ring-opacity-75"
+              >
+                <span>Customize Chat</span>
+                <IconMdiChevronDown
+                  :class="open ? 'transform rotate-180' : ''"
+                  class="w-5 h-5 text-emerald-500"
+                />
+              </DisclosureButton>
+              <DisclosurePanel class="pt-4 pb-2 text-sm text-gray-500">
+                <ul class="">
+                  <li class="px-2 py-3 hover:bg-gray-100 rounded-md">
+                    <button type="button" class="flex items-center space-x-2">
+                      <IconMdiBrightness6 class="text-emerald-500 text-lg" />
+                      <span class="text-gray-700 text-sm font-medium">Change Theme</span>
+                    </button>
+                  </li>
+                  <li class="px-2 py-3 hover:bg-gray-100 rounded-md">
+                    <button type="button" class="flex items-center space-x-2">
+                      <IconMdiEmoticonNeutral class="text-emerald-500 text-lg" />
+                      <span class="text-gray-700 text-sm font-medium">Change Emoji</span>
+                    </button>
+                  </li>
+                  <li class="px-2 py-3 hover:bg-gray-100 rounded-md">
+                    <button type="button" class="flex items-center space-x-2">
+                      <IconMdiAccountBox class="text-emerald-500 text-lg" />
+                      <span class="text-gray-700 text-sm font-medium">Change Nickname</span>
+                    </button>
+                  </li>
+                </ul>
+              </DisclosurePanel>
+            </Disclosure>
+            <Disclosure as="div" v-slot="{ open }" class="mt-2">
+              <DisclosureButton
+                class="flex justify-between w-full px-4 py-2 text-sm font-medium text-left text-gray-700 rounded-lg hover:bg-gray-100 focus:outline-none focus-visible:ring focus-visible:ring-emerald-500 focus-visible:ring-opacity-75"
+              >
+                <span>Privacy and Support</span>
+                <IconMdiChevronDown
+                  :class="open ? 'transform rotate-180' : ''"
+                  class="w-5 h-5 text-emerald-500"
+                />
+              </DisclosureButton>
+              <DisclosurePanel class="pt-4 pb-2 text-sm text-gray-500">
+                <ul class="">
+                  <li class="px-2 py-3 hover:bg-gray-100 rounded-md">
+                    <button type="button" class="flex items-center space-x-2">
+                      <IconMdiBlockHelper class="text-emerald-500 text-base" />
+                      <span class="text-gray-700 text-sm font-medium">Block</span>
+                    </button>
+                  </li>
+                  <li class="px-2 py-3 hover:bg-gray-100 rounded-md">
+                    <button type="button" class="flex items-center space-x-2">
+                      <IconMdiAlert class="text-emerald-500 text-lg" />
+                      <span class="text-gray-700 text-sm font-medium">Report</span>
+                    </button>
+                  </li>
+                  <li class="px-2 py-3 hover:bg-gray-100 rounded-md">
+                    <button type="button" class="flex items-center space-x-2">
+                      <IconMdiInformation class="text-emerald-500 text-lg" />
+                      <span class="text-gray-700 text-sm font-medium">About Us</span>
+                    </button>
+                  </li>
+                </ul>
+              </DisclosurePanel>
+            </Disclosure>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </template>
