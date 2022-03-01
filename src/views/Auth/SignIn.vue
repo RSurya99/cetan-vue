@@ -147,24 +147,6 @@ const formSubmit = function () {
           Sign In
         </button>
       </form>
-      <span class="text-sm text-gray-500 font-medium my-6">or continue with</span>
-      <div class="w-full flex items-center justify-between space-x-4">
-        <button
-          class="inline-block w-full px-4 py-2 bg-white border-2 border-emerald-500 rounded-md shadow transition duration-300 hover:shadow-md transform active:scale-95"
-        >
-          <IconLogosGoogleIcon class="m-auto" />
-        </button>
-        <button
-          class="inline-block w-full px-4 py-2 bg-white border-2 border-emerald-500 rounded-md shadow transition duration-300 hover:shadow-md transform active:scale-95"
-        >
-          <IconLogosGithubIcon class="m-auto" />
-        </button>
-        <button
-          class="inline-block w-full px-4 py-2 bg-white border-2 border-emerald-500 rounded-md shadow transition duration-300 hover:shadow-md transform active:scale-95"
-        >
-          <IconLogosFacebook class="m-auto" />
-        </button>
-      </div>
       <span class="text-sm text-gray-500 font-medium mt-6"
         >Don't have an account yet?
         <RouterLink to="/register" class="underline hover:text-gray-600 transition duration-300">
