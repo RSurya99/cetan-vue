@@ -29,6 +29,14 @@ const router = createRouter({
         hideForAuth: true,
       },
     },
+    {
+      path: '/forgot-password',
+      name: 'forgot-password',
+      component: () => import('../views/Auth/ForgotPassword.vue'),
+      meta: {
+        hideForAuth: true,
+      },
+    },
   ],
 })
 

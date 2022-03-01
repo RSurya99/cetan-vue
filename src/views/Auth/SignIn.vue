@@ -40,6 +40,12 @@ const formSubmit = function () {
           v-model="password"
           class="mt-6"
         />
+        <RouterLink
+          to="/forgot-password"
+          class="inline-block text-sm text-gray-500 font-medium mt-2 hover:text-gray-600 transition duration-300"
+        >
+          Forgot Password?
+        </RouterLink>
         <BuilderBaseButton type="submit" text="Sign In" />
       </form>
       <BuilderAuthBaseFooter
