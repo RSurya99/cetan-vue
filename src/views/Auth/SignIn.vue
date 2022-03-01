@@ -7,7 +7,6 @@ const { errors, email, password, validate } = useAuthValidation()
 
 const authStore = useAuthStore()
 const router = useRouter()
-
 const isEyeClicked = ref(false)
 
 const formSubmit = function () {
@@ -28,16 +27,10 @@ const formSubmit = function () {
 }
 </script>
 <template>
-  <section
-    class="w-full h-full sm:min-h-screen bg-gradient-to-r from-green-500 to-emerald-500 flex flex-col items-center justify-center"
-  >
-    <div
-      class="flex flex-col items-center justify-center sm:my-10 px-8 sm:px-14 py-20 sm:py-8 bg-white shadow-xl sm:rounded-xl w-full sm:max-w-[550px]"
-    >
-      <h1 class="text-4xl font-bold text-emerald-500">Cetan 👋</h1>
-      <p class="text-gray-500 font-medium leading-relaxed mt-2">
-        Please login first before using this app
-      </p>
+  <PageAuthBaseWrapper>
+    <PageAuthBaseSection>
+      <BuilderAuthBaseHeader title="Cetan 👋" subtitle="Please login first before using this app" />
+
       <form @submit.prevent="formSubmit" class="w-full mt-6">
         <div class="flex flex-col">
           <label for="email" class="text-sm text-gray-500 font-medium mb-1">Email</label>
@@ -95,12 +88,10 @@ const formSubmit = function () {
           Sign In
         </button>
       </form>
-      <span class="text-sm text-gray-500 font-medium mt-6"
-        >Don't have an account yet?
-        <RouterLink to="/register" class="underline hover:text-gray-600 transition duration-300">
-          Register now
-        </RouterLink>
-      </span>
-    </div>
-  </section>
+      <BuilderAuthBaseFooter
+        text="Don't have an account yet?"
+        :link="{ text: 'Register now', to: '/register' }"
+      />
+    </PageAuthBaseSection>
+  </PageAuthBaseWrapper>
 </template>

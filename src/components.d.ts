@@ -4,6 +4,10 @@
 
 declare module 'vue' {
   export interface GlobalComponents {
+    BuilderAuthBaseFooter: typeof import('./components/Builder/Auth/BaseFooter.vue')['default']
+    BuilderAuthBaseHeader: typeof import('./components/Builder/Auth/BaseHeader.vue')['default']
+    BuilderBaseFooter: typeof import('./components/Builder/BaseFooter.vue')['default']
+    BuilderBaseHeader: typeof import('./components/Builder/BaseHeader.vue')['default']
     ChatMessageInput: typeof import('./components/ChatMessageInput.vue')['default']
     HelloWorld: typeof import('./components/HelloWorld.vue')['default']
     IconLogosFacebook: typeof import('~icons/logos/facebook')['default']
@@ -28,6 +32,13 @@ declare module 'vue' {
     IconMdiMagnify: typeof import('~icons/mdi/magnify')['default']
     IconMdiPaperclip: typeof import('~icons/mdi/paperclip')['default']
     IconMdiSend: typeof import('~icons/mdi/send')['default']
+    PageAuthBaseFooter: typeof import('./components/Page/Auth/BaseFooter.vue')['default']
+    PageAuthBaseForm: typeof import('./components/Page/Auth/BaseForm.vue')['default']
+    PageAuthBaseHeader: typeof import('./components/Page/Auth/BaseHeader.vue')['default']
+    PageAuthBaseSection: typeof import('./components/Page/Auth/BaseSection.vue')['default']
+    PageAuthBaseWrapper: typeof import('./components/Page/Auth/BaseWrapper.vue')['default']
+    PageAuthWrapper: typeof import('./components/Page/Auth/Wrapper.vue')['default']
+    PageAuthWrapperComponent: typeof import('./components/Page/Auth/WrapperComponent.vue')['default']
   }
 }
 

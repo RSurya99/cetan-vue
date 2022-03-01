@@ -7,7 +7,6 @@ const { errors, email, password, name, validate } = useAuthValidation()
 
 const authStore = useAuthStore()
 const router = useRouter()
-
 const isEyeClicked = ref(false)
 
 const formSubmit = function () {
