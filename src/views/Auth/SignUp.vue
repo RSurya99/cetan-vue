@@ -1,4 +1,10 @@
 <script setup lang="ts">
+import { useAuthStore } from '@/stores/auth'
+import NProgress from 'nprogress'
+
+const authStore = useAuthStore()
+const router = useRouter()
+
 interface ErrorMessage {
   field: string
   message: string
@@ -16,12 +22,6 @@ const validateEmail = function (email) {
     .match(
       /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
     )
-}
-
-const validateStringAndNumber = function (el) {
-  return String(el)
-    .toLowerCase()
-    .match(/^(?:[0-9]+[a-z]|[a-z]+[0-9])[a-z0-9]*$/i)
 }
 
 const formSubmit = function () {
@@ -62,30 +62,32 @@ const formSubmit = function () {
         message: 'Email is not valid',
       },
     ]
-  } else if (password.value.length < 6 || validateStringAndNumber(password.value) === null) {
-    if (password.value.length < 6) {
-      errors.value = [
-        ...errors.value,
-        {
-          field: 'password',
-          message: 'Password must be at least 6 characters',
-        },
-      ]
-    } else if (validateStringAndNumber(password.value) === null) {
-      errors.value = [
-        ...errors.value,
-        {
-          field: 'password',
-          message: 'Password must contain at least one number and one letter',
-        },
-      ]
-    }
+  } else if (password.value.length < 6) {
+    errors.value = [
+      ...errors.value,
+      {
+        field: 'password',
+        message: 'Password must be at least 6 characters',
+      },
+    ]
   } else {
     errors.value = []
   }
 
   if (errors.value.length === 0) {
-    alert(email.value + password.value)
+    authStore
+      .registerEvent({
+        name: name.value,
+        email: email.value,
+        password: password.value,
+      })
+      .then(() => {
+        alert('berhasil register')
+        router.push('/login')
+      })
+      .catch(() => {
+        NProgress.done()
+      })
   }
 }
 </script>

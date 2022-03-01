@@ -10,6 +10,14 @@ import {
   DisclosureButton,
   DisclosurePanel,
 } from '@headlessui/vue'
+import { useAuthStore } from '@/stores/auth'
+
+const authStore = useAuthStore()
+const userData = computed(() => authStore.user)
+
+onMounted(() => {
+  console.log('userData', userData.value)
+})
 
 const people = [
   { id: 1, name: 'Wade Cooper' },
@@ -46,7 +54,7 @@ const profileMenu = ref(false)
         <div class="w-full flex items-center justify-between">
           <div class="flex items-center space-x-4 px-2">
             <img
-              src="https://randomuser.me/api/portraits/men/60.jpg"
+              src="https://randomuser.me/api/portraits/men/45.jpg"
               class="w-10 h-10 rounded-full shadow-sm"
             />
             <h2 class="text-2xl font-bold text-gray-700 dark:text-white">Chats</h2>
@@ -156,7 +164,7 @@ const profileMenu = ref(false)
             class="w-full flex items-center space-x-4 px-4 py-2 text-left hover:bg-emerald-100 rounded-md hover:shadow-sm transition duration-300"
           >
             <img
-              src="https://randomuser.me/api/portraits/men/60.jpg"
+              :src="`https://randomuser.me/api/portraits/men/${i}.jpg`"
               class="w-12 h-12 rounded-full shadow-sm"
             />
             <div class="grow space-y-1">
