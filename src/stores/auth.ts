@@ -25,5 +25,15 @@ export const useAuthStore = defineStore({
         throw error
       })
     },
+    logoutEvent() {
+      return ApiService.apiLogout()
+        .then(() => {
+          localStorage.removeItem('user')
+          this.user = {}
+        })
+        .catch((error) => {
+          throw error
+        })
+    },
   },
 })

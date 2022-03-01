@@ -11,8 +11,10 @@ import {
   DisclosurePanel,
 } from '@headlessui/vue'
 import { useAuthStore } from '@/stores/auth'
+import NProgress from 'nprogress'
 
 const authStore = useAuthStore()
+const router = useRouter()
 const userData = computed(() => authStore.user)
 
 onMounted(() => {
@@ -46,6 +48,19 @@ const sendMessage = function () {
 }
 const sideInfo = ref(true)
 const profileMenu = ref(false)
+
+const logout = function () {
+  authStore
+    .logoutEvent()
+    .then(() => {
+      console.log('berhasil logout')
+      router.push('/login')
+    })
+    .catch((err) => {
+      console.log(err, 'gagal logout')
+      NProgress.done()
+    })
+}
 </script>
 <template>
   <div class="w-full max-h-screen overflow-hidden">
@@ -83,6 +98,7 @@ const profileMenu = ref(false)
                 </li>
                 <li>
                   <button
+                    @click="logout"
                     class="w-full text-left text-sm text-gray-700 font-medium px-4 py-2 hover:bg-emerald-100"
                   >
                     Logout
