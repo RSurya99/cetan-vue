@@ -6,6 +6,9 @@ declare module 'vue' {
   export interface GlobalComponents {
     ChatMessageInput: typeof import('./components/ChatMessageInput.vue')['default']
     HelloWorld: typeof import('./components/HelloWorld.vue')['default']
+    IconLogosFacebook: typeof import('~icons/logos/facebook')['default']
+    IconLogosGithubIcon: typeof import('~icons/logos/github-icon')['default']
+    IconLogosGoogleIcon: typeof import('~icons/logos/google-icon')['default']
     IconMdiAccountBox: typeof import('~icons/mdi/account-box')['default']
     IconMdiAccountBoxOutline: typeof import('~icons/mdi/account-box-outline')['default']
     IconMdiAlert: typeof import('~icons/mdi/alert')['default']
@@ -19,6 +22,8 @@ declare module 'vue' {
     IconMdiEmoticonNeutral: typeof import('~icons/mdi/emoticon-neutral')['default']
     IconMdiEmoticonNeutralOutline: typeof import('~icons/mdi/emoticon-neutral-outline')['default']
     IconMdiEmoticonOutline: typeof import('~icons/mdi/emoticon-outline')['default']
+    IconMdiEye: typeof import('~icons/mdi/eye')['default']
+    IconMdiEyeOff: typeof import('~icons/mdi/eye-off')['default']
     IconMdiInformation: typeof import('~icons/mdi/information')['default']
     IconMdiMagnify: typeof import('~icons/mdi/magnify')['default']
     IconMdiPaperclip: typeof import('~icons/mdi/paperclip')['default']

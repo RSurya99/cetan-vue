@@ -47,7 +47,7 @@ const profileMenu = ref(false)
           <div class="flex items-center space-x-4 px-2">
             <img
               src="https://randomuser.me/api/portraits/men/60.jpg"
-              class="w-10 h-10 rounded-full"
+              class="w-10 h-10 rounded-full shadow-sm"
             />
             <h2 class="text-2xl font-bold text-gray-700 dark:text-white">Chats</h2>
           </div>
@@ -157,7 +157,7 @@ const profileMenu = ref(false)
           >
             <img
               src="https://randomuser.me/api/portraits/men/60.jpg"
-              class="w-12 h-12 rounded-full"
+              class="w-12 h-12 rounded-full shadow-sm"
             />
             <div class="grow space-y-1">
               <div class="flex items-center justify-between">
@@ -174,7 +174,7 @@ const profileMenu = ref(false)
           <div class="flex items-center space-x-2">
             <img
               src="https://randomuser.me/api/portraits/men/60.jpg"
-              class="w-12 h-12 rounded-full"
+              class="w-12 h-12 rounded-full shadow-sm"
             />
             <div class="flex flex-col">
               <h4 class="font-semibold text-gray-700">Ochi</h4>
@@ -243,7 +243,10 @@ const profileMenu = ref(false)
         </section>
       </div>
       <div v-if="sideInfo" class="col-span-3 px-4 py-8 flex flex-col items-center">
-        <img src="https://randomuser.me/api/portraits/men/60.jpg" class="w-20 h-20 rounded-full" />
+        <img
+          src="https://randomuser.me/api/portraits/men/60.jpg"
+          class="w-20 h-20 rounded-full shadow"
+        />
         <h4 class="text-lg font-semibold text-gray-700">Adam Ananta</h4>
         <div class="w-full pt-4">
           <div class="w-full max-w-md p-2 mx-auto bg-white rounded-2xl">
