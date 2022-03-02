@@ -8,6 +8,7 @@ const loadingStore = useLoadingStore()
 
 const isLoading = computed(() => loadingStore.isLoading)
 const rooms = computed(() => roomStore.rooms)
+const roomsLength = computed(() => (rooms.value.length > 0 ? rooms.value.length : 6))
 const message = ref('')
 const sendMessage = function () {
   alert('oke')
@@ -33,12 +34,12 @@ onMounted(() => {
         <SidebarTopBar />
         <SidebarSearchInput />
         <div class="h-[78vh] mt-6 space-y-2 overflow-auto">
-          <div v-if="isLoading">
-            <SidebarChatCardSkeleton v-for="i in 7" :key="i" />
-          </div>
-          <div v-else>
-            <SidebarChatCard v-for="(room, i) in rooms" :key="i" :room="room" />
-          </div>
+          <SidebarChatCard
+            v-for="i in roomsLength"
+            :key="i"
+            :room="roomsLength > 0 ? rooms[i - 1] : {}"
+            :skeleton="isLoading"
+          />
         </div>
       </SidebarWrapper>
       <div :class="[sideInfo ? 'col-span-6' : 'col-span-9']">

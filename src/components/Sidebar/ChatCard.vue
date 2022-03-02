@@ -22,10 +22,7 @@ const lastMessageFrom = computed(() => {
 const lastMessage = computed(() => props.room.messages.at(-1).message.substring(0, 30))
 </script>
 <template>
-  <div
-    v-if="props.skeleton"
-    class="w-full flex items-center animate-pulse space-x-2 p-2 text-left hover:bg-emerald-100 rounded-md hover:shadow-sm transition duration-300"
-  >
+  <div v-if="props.skeleton" class="w-full flex items-center animate-pulse space-x-2 p-2">
     <div class="w-12 h-12 rounded-full shadow-sm bg-emerald-200"></div>
     <div class="grow space-y-3">
       <div class="flex justify-between">
