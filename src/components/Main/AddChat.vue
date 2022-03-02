@@ -1,0 +1,22 @@
+<script setup lang="ts">
+const message = ref('')
+const sendMessage = function () {
+  alert('oke')
+}
+</script>
+<template>
+  <section class="w-full h-[10%] px-4 py-2 flex items-center justify-between space-x-4">
+    <button>
+      <IconMdiEmoticonOutline class="text-emerald-500 text-xl" />
+    </button>
+    <button>
+      <IconMdiPaperclip class="text-emerald-500 text-xl" />
+    </button>
+    <form @submit.prevent="sendMessage" class="w-full flex items-center space-x-4">
+      <ChatMessageInput :message="message" @update:message="message = $event" />
+      <button type="submit">
+        <IconMdiSend class="text-emerald-500 text-xl" />
+      </button>
+    </form>
+  </section>
+</template>
