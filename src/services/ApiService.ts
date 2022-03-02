@@ -37,4 +37,13 @@ export default {
       }
     )
   },
+  apiGetAllRoom() {
+    const authStore = useAuthStore()
+    return instance.get('/room', {
+      headers: {
+        Authorization: 'Bearer ' + authStore.user.token,
+        'Content-Type': 'application/json',
+      },
+    })
+  },
 }

@@ -28,6 +28,13 @@ declare module 'vue' {
     IconMdiSend: typeof import('~icons/mdi/send')['default']
     PageAuthBaseSection: typeof import('./components/Page/Auth/BaseSection.vue')['default']
     PageAuthBaseWrapper: typeof import('./components/Page/Auth/BaseWrapper.vue')['default']
+    SidebarChatCard: typeof import('./components/Sidebar/ChatCard.vue')['default']
+    'SidebarChatCard copy': typeof import('./components/Sidebar/ChatCard copy.vue')['default']
+    SidebarChatCardSkeleton: typeof import('./components/Sidebar/ChatCardSkeleton.vue')['default']
+    SidebarSearch: typeof import('./components/Sidebar/Search.vue')['default']
+    SidebarSearchInput: typeof import('./components/Sidebar/SearchInput.vue')['default']
+    SidebarTopBar: typeof import('./components/Sidebar/TopBar.vue')['default']
+    SidebarWrapper: typeof import('./components/Sidebar/Wrapper.vue')['default']
   }
 }
 
