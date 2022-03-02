@@ -29,6 +29,7 @@ declare module 'vue' {
     InfobarProfile: typeof import('./components/Infobar/Profile.vue')['default']
     MainAddChat: typeof import('./components/Main/AddChat.vue')['default']
     MainChatBox: typeof import('./components/Main/ChatBox.vue')['default']
+    MainChatBoxMessage: typeof import('./components/Main/ChatBoxMessage.vue')['default']
     MainNavbar: typeof import('./components/Main/Navbar.vue')['default']
     PageAuthBaseSection: typeof import('./components/Page/Auth/BaseSection.vue')['default']
     PageAuthBaseWrapper: typeof import('./components/Page/Auth/BaseWrapper.vue')['default']
