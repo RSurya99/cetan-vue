@@ -35,20 +35,24 @@ const lastMessage = computed(() => props.room.messages.at(-1).message.substring(
   <button
     v-else
     type="button"
-    class="w-full flex items-center space-x-2 p-2 text-left hover:bg-emerald-100 rounded-md hover:shadow-sm transition duration-300"
+    class="w-full flex items-center space-x-2 p-2 text-left dark:bg-emerald-600 dark:hover:bg-emerald-500 hover:bg-emerald-100 rounded-md hover:shadow-sm transition duration-300"
   >
     <img
       :src="`https://randomuser.me/api/portraits/men/${props.room.room_id}.jpg`"
-      class="w-12 h-12 rounded-full shadow-sm"
+      class="w-12 h-12 rounded-full shadow dark:shadow-gray-500"
     />
     <div class="grow space-y-1">
       <div class="flex items-center justify-between">
-        <h4 class="font-medium text-gray-700">{{ props.room.opponent.name.substring(0, 15) }}</h4>
-        <span class="text-xs text-gray-500"
-          >&middot; {{ props.room.messages.at(-1).created_at }}</span
-        >
+        <h4 class="font-medium dark:text-white text-gray-700">
+          {{ props.room.opponent.name.substring(0, 15) }}
+        </h4>
+        <span class="text-xs dark:text-gray-100 text-gray-500">{{
+          props.room.messages.at(-1).created_at
+        }}</span>
       </div>
-      <p class="truncate text-xs text-gray-500">{{ lastMessageFrom }}: {{ lastMessage }}</p>
+      <p class="truncate text-xs dark:text-gray-100 text-gray-500">
+        {{ lastMessageFrom }}: {{ lastMessage }}
+      </p>
     </div>
   </button>
 </template>

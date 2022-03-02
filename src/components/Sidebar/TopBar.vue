@@ -32,7 +32,7 @@ const logout = function () {
     <div class="relative">
       <button
         @click="profileMenu = !profileMenu"
-        class="p-2 bg-gray-200 group hover:bg-emerald-300 rounded-full shadow-sm transition duration-300"
+        class="p-2 bg-gray-200 dark:bg-white group hover:bg-emerald-300 dark:hover:bg-emerald-500 rounded-full shadow-sm transition duration-300"
       >
         <IconMdiDotsHorizontal
           class="text-gray-500 group-hover:text-white text-sm"
