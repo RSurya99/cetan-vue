@@ -50,13 +50,13 @@ const toggleInfobar = function () {
         </div>
       </div>
       <!-- Main -->
-      <div :class="[infobar ? 'col-span-6' : 'col-span-9']">
+      <div :class="[infobar && roomStore.isSelectedRoomEmpty ? 'col-span-6' : 'col-span-9']">
         <MainNavbar @toggle-infobar="toggleInfobar()" />
         <MainChatBox />
         <MainAddChat />
       </div>
-      <!-- Inforbar -->
-      <div v-if="infobar" class="col-span-3 px-4 py-8">
+      <!-- Infobar -->
+      <div v-if="infobar && roomStore.isSelectedRoomEmpty" class="col-span-3 px-4 py-8">
         <InfobarProfile />
         <InfobarAccordion />
       </div>

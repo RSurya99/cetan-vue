@@ -4,6 +4,9 @@ export default {
 }
 </script>
 <script setup lang="ts">
+import { useRoomStore } from '@/stores/room'
+
+const roomStore = useRoomStore()
 const emit = defineEmits(['toggleInfobar'])
 
 const buttonClick = function () {
@@ -11,10 +14,13 @@ const buttonClick = function () {
 }
 </script>
 <template>
-  <div class="w-full border-b border-gray-300 px-4 py-2 flex items-center justify-between">
-    <div class="flex items-center space-x-2">
+  <div
+    class="w-full border-b border-gray-300 px-4 py-2 flex items-center"
+    :class="roomStore.isSelectedRoomEmpty ? 'justify-between' : 'justify-end'"
+  >
+    <div class="flex items-center space-x-2" v-if="roomStore.isSelectedRoomEmpty">
       <img
-        src="https://randomuser.me/api/portraits/men/60.jpg"
+        :src="`https://randomuser.me/api/portraits/men/60.jpg`"
         class="w-12 h-12 rounded-full shadow-sm"
       />
       <div class="flex flex-col">

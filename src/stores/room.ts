@@ -8,6 +8,9 @@ export const useRoomStore = defineStore({
     userFind: {},
     selectedRoom: {},
   }),
+  getters: {
+    isSelectedRoomEmpty: (state) => (Object.keys(state.selectedRoom).length === 0 ? false : true),
+  },
   actions: {
     getRooms() {
       return ApiService.apiGetAllRoom()
