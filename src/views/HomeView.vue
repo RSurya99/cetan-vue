@@ -7,7 +7,9 @@ const loadingStore = useLoadingStore()
 
 const isLoading = computed(() => loadingStore.isLoading)
 const rooms = computed(() => roomStore.rooms)
-const roomsLength = computed(() => (rooms.value.length > 0 ? rooms.value.length : 6))
+const roomsLength = computed(() =>
+  rooms.value.length > 0 || !isLoading.value ? rooms.value.length : 6
+)
 const infobar = ref(true)
 onBeforeMount(() => loadingStore.setLoading(true))
 onMounted(() => {
@@ -40,6 +42,11 @@ const toggleInfobar = function () {
             :room="roomsLength > 0 ? rooms[i - 1] : {}"
             :skeleton="isLoading"
           />
+          <div v-if="roomsLength === 0">
+            <h3 class="text-xl font-semibold text-gray-700 dark:text-white text-center">
+              No chat found
+            </h3>
+          </div>
         </div>
       </div>
       <!-- Main -->

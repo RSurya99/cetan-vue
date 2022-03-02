@@ -34,7 +34,7 @@ const formSubmit = function () {
 <template>
   <PageAuthBaseWrapper>
     <PageAuthBaseSection>
-      <BuilderAuthBaseHeader title="Cetan 👋" subtitle="Please login first before using this app" />
+      <BuilderAuthBaseHeader title="Cetan 💬" subtitle="Please login first before using this app" />
 
       <form @submit.prevent="formSubmit" class="w-full mt-6">
         <FormInput name="email" placeholder="example@domain.com" :errors="errors" v-model="email" />

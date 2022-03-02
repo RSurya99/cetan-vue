@@ -1,4 +1,7 @@
 <script setup lang="ts">
+import { useAuthStore } from '@/stores/auth'
+
+const authStore = useAuthStore()
 const props = defineProps({
   room: {
     type: Object,
@@ -11,15 +14,25 @@ const props = defineProps({
 })
 
 const lastMessageFrom = computed(() => {
-  const fromId = props.room.messages.at(-1).from
-  if (fromId === props.room.self.id) {
-    return 'you'
+  if (authStore.isAuthenticated) {
+    const fromId = props.room.messages.at(-1).from
+    if (fromId === props.room.self.id) {
+      return 'you'
+    } else {
+      return props.room.opponent.name.split(' ')[0]
+    }
   } else {
-    return props.room.opponent.name.split(' ')[0]
+    return ''
   }
 })
 
-const lastMessage = computed(() => props.room.messages.at(-1).message.substring(0, 30))
+const lastMessage = computed(() => {
+  if (authStore.isAuthenticated) {
+    return props.room.messages.at(-1).message.substring(0, 30)
+  } else {
+    return ''
+  }
+})
 </script>
 <template>
   <div v-if="props.skeleton" class="w-full flex items-center animate-pulse space-x-2 p-2">
