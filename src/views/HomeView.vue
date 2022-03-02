@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { Disclosure, DisclosureButton, DisclosurePanel } from '@headlessui/vue'
 import { useRoomStore } from '@/stores/room'
 import { useLoadingStore } from '@/stores/loading'
 
@@ -13,7 +12,7 @@ const message = ref('')
 const sendMessage = function () {
   alert('oke')
 }
-const sideInfo = ref(true)
+const infobar = ref(true)
 onBeforeMount(() => loadingStore.setLoading(true))
 onMounted(() => {
   roomStore
@@ -30,7 +29,8 @@ onMounted(() => {
 <template>
   <div class="w-full max-h-screen overflow-hidden">
     <div class="grid grid-cols-12 divide-x divide-gray-300">
-      <SidebarWrapper>
+      <!-- Sidebar -->
+      <div class="col-span-3 px-2 py-4">
         <SidebarTopBar />
         <SidebarSearchInput />
         <div class="h-[78vh] mt-6 space-y-2 overflow-auto">
@@ -41,8 +41,9 @@ onMounted(() => {
             :skeleton="isLoading"
           />
         </div>
-      </SidebarWrapper>
-      <div :class="[sideInfo ? 'col-span-6' : 'col-span-9']">
+      </div>
+      <!-- Main -->
+      <div :class="[infobar ? 'col-span-6' : 'col-span-9']">
         <div class="w-full border-b border-gray-300 px-4 py-2 flex items-center justify-between">
           <div class="flex items-center space-x-2">
             <img
@@ -56,7 +57,7 @@ onMounted(() => {
           </div>
           <div>
             <button
-              @click="sideInfo = !sideInfo"
+              @click="infobar = !infobar"
               class="p-2 bg-gray-200 group hover:bg-emerald-300 rounded-full shadow-sm transition duration-300"
             >
               <IconMdiDotsHorizontal
@@ -115,82 +116,10 @@ onMounted(() => {
           </form>
         </section>
       </div>
-      <div v-if="sideInfo" class="col-span-3 px-4 py-8 flex flex-col items-center">
-        <img
-          src="https://randomuser.me/api/portraits/men/60.jpg"
-          class="w-20 h-20 rounded-full shadow"
-        />
-        <h4 class="text-lg font-semibold text-gray-700">Adam Ananta</h4>
-        <div class="w-full pt-4">
-          <div class="w-full max-w-md p-2 mx-auto bg-white rounded-2xl">
-            <Disclosure v-slot="{ open }">
-              <DisclosureButton
-                class="flex justify-between w-full px-4 py-2 text-sm font-medium text-left text-gray-700 rounded-lg hover:bg-gray-100 focus:outline-none focus-visible:ring focus-visible:ring-emerald-500 focus-visible:ring-opacity-75"
-              >
-                <span>Customize Chat</span>
-                <IconMdiChevronDown
-                  :class="open ? 'transform rotate-180' : ''"
-                  class="w-5 h-5 text-emerald-500"
-                />
-              </DisclosureButton>
-              <DisclosurePanel class="pt-4 pb-2 text-sm text-gray-500">
-                <ul class="">
-                  <li class="px-2 py-3 hover:bg-gray-100 rounded-md">
-                    <button type="button" class="flex items-center space-x-2">
-                      <IconMdiBrightness6 class="text-emerald-500 text-lg" />
-                      <span class="text-gray-700 text-sm font-medium">Change Theme</span>
-                    </button>
-                  </li>
-                  <li class="px-2 py-3 hover:bg-gray-100 rounded-md">
-                    <button type="button" class="flex items-center space-x-2">
-                      <IconMdiEmoticonNeutral class="text-emerald-500 text-lg" />
-                      <span class="text-gray-700 text-sm font-medium">Change Emoji</span>
-                    </button>
-                  </li>
-                  <li class="px-2 py-3 hover:bg-gray-100 rounded-md">
-                    <button type="button" class="flex items-center space-x-2">
-                      <IconMdiAccountBox class="text-emerald-500 text-lg" />
-                      <span class="text-gray-700 text-sm font-medium">Change Nickname</span>
-                    </button>
-                  </li>
-                </ul>
-              </DisclosurePanel>
-            </Disclosure>
-            <Disclosure as="div" v-slot="{ open }" class="mt-2">
-              <DisclosureButton
-                class="flex justify-between w-full px-4 py-2 text-sm font-medium text-left text-gray-700 rounded-lg hover:bg-gray-100 focus:outline-none focus-visible:ring focus-visible:ring-emerald-500 focus-visible:ring-opacity-75"
-              >
-                <span>Privacy and Support</span>
-                <IconMdiChevronDown
-                  :class="open ? 'transform rotate-180' : ''"
-                  class="w-5 h-5 text-emerald-500"
-                />
-              </DisclosureButton>
-              <DisclosurePanel class="pt-4 pb-2 text-sm text-gray-500">
-                <ul class="">
-                  <li class="px-2 py-3 hover:bg-gray-100 rounded-md">
-                    <button type="button" class="flex items-center space-x-2">
-                      <IconMdiBlockHelper class="text-emerald-500 text-base" />
-                      <span class="text-gray-700 text-sm font-medium">Block</span>
-                    </button>
-                  </li>
-                  <li class="px-2 py-3 hover:bg-gray-100 rounded-md">
-                    <button type="button" class="flex items-center space-x-2">
-                      <IconMdiAlert class="text-emerald-500 text-lg" />
-                      <span class="text-gray-700 text-sm font-medium">Report</span>
-                    </button>
-                  </li>
-                  <li class="px-2 py-3 hover:bg-gray-100 rounded-md">
-                    <button type="button" class="flex items-center space-x-2">
-                      <IconMdiInformation class="text-emerald-500 text-lg" />
-                      <span class="text-gray-700 text-sm font-medium">About Us</span>
-                    </button>
-                  </li>
-                </ul>
-              </DisclosurePanel>
-            </Disclosure>
-          </div>
-        </div>
+      <!-- Inforbar -->
+      <div v-if="infobar" class="col-span-3 px-4 py-8">
+        <InfobarProfile />
+        <InfobarAccordion />
       </div>
     </div>
   </div>
