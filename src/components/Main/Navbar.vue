@@ -7,6 +7,7 @@ export default {
 import { useRoomStore } from '@/stores/room'
 
 const roomStore = useRoomStore()
+const selectedRoom = computed(() => roomStore.selectedRoom)
 const emit = defineEmits(['toggleInfobar'])
 
 const buttonClick = function () {
@@ -24,7 +25,9 @@ const buttonClick = function () {
         class="w-12 h-12 rounded-full shadow-sm"
       />
       <div class="flex flex-col">
-        <h4 class="font-semibold text-gray-700 dark:text-white">Ochi</h4>
+        <h4 class="font-semibold text-gray-700 dark:text-white">
+          {{ selectedRoom.opponent.name }}
+        </h4>
         <span class="text-xs text-gray-500 dark:text-gray-100">Aktif 4 jam lalu</span>
       </div>
     </div>

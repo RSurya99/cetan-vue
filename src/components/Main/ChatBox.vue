@@ -29,7 +29,7 @@ const roomStore = useRoomStore()
         </div>
       </div>
     </div>
-    <div class="w-full h-full flex flex-col items-center justify-center">
+    <div v-else class="w-full h-full flex flex-col items-center justify-center">
       <h2 class="text-3xl text-center font-semibold text-gray-700 dark:text-white">
         Click chat in sidebar or start a new chat
       </h2>

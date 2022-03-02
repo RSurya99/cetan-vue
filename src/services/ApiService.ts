@@ -57,4 +57,13 @@ export default {
   apiFindUser(event) {
     return instance.post('/search-user', event)
   },
+  apiSendMessage(event) {
+    const authStore = useAuthStore()
+    return instance.post('/message', event, {
+      headers: {
+        Authorization: 'Bearer ' + authStore.user.token,
+        'Content-Type': 'application/json',
+      },
+    })
+  },
 }

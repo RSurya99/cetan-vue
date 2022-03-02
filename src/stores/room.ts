@@ -1,12 +1,51 @@
 import { defineStore } from 'pinia'
 import ApiService from '@/services/ApiService'
 
+interface Self {
+  name: string
+  email: string
+  email_verified_at: number
+  token: number
+  created_at: string
+  bio: string
+  id: number
+  images: []
+}
+
+interface Opponent {
+  name: string
+  email: string
+  email_verified_at: number
+  token: number
+  created_at: string
+  bio: string
+  id: number
+  images: []
+}
+
+interface Message {
+  id: number
+  from: number
+  to: number
+  message: string
+  seen: boolean
+  created_at: string
+}
+
+interface Room {
+  room_id: number
+  self: Self
+  opponent: Opponent
+  created_at: string
+  messages: Message[]
+}
+
 export const useRoomStore = defineStore({
   id: 'room',
   state: () => ({
     rooms: [],
     userFind: {},
-    selectedRoom: {},
+    selectedRoom: {} as Room,
   }),
   getters: {
     isSelectedRoomEmpty: (state) => (Object.keys(state.selectedRoom).length === 0 ? false : true),
@@ -38,6 +77,11 @@ export const useRoomStore = defineStore({
         .catch((error) => {
           throw error
         })
+    },
+    sendMessageEvent(payload) {
+      return ApiService.apiSendMessage(payload).catch((error) => {
+        throw error
+      })
     },
   },
 })
