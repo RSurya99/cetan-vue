@@ -4,7 +4,6 @@ import { useLoadingStore } from '@/stores/loading'
 
 const roomStore = useRoomStore()
 const loadingStore = useLoadingStore()
-const testId = ref(true)
 const roomId = ref(0)
 
 const isLoading = computed(() => loadingStore.isLoading)
@@ -26,7 +25,9 @@ onMounted(() => {
     })
 
   window.Echo.channel('Cetan-app').listen('.message-notification', (e) => {
-    roomStore.getRooms()
+    if (roomId.value != e.id) {
+      roomStore.getRooms()
+    }
   })
 })
 
