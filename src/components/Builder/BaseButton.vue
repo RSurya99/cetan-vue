@@ -13,6 +13,10 @@ const props = defineProps({
     type: String,
     default: '',
   },
+  disabled: {
+    type: Boolean,
+    default: false,
+  },
 })
 </script>
 <template>
@@ -26,7 +30,10 @@ const props = defineProps({
   <button
     v-else
     :type="props.type"
-    class="inline-block w-full px-4 py-2 mt-8 bg-emerald-500 hover:bg-emerald-400 rounded-md shadow text-center text-white font-medium transition duration-300 focus:ring-2 focus:ring-offset-2 focus:ring-emerald-500 transform active:scale-95"
+    :class="[
+      props.disabled ? 'cursor-not-allowed bg-gray-400' : 'bg-emerald-500 hover:bg-emerald-400',
+    ]"
+    class="inline-block w-full px-4 py-2 mt-8 rounded-md shadow text-center text-white font-medium transition duration-300 focus:ring-2 focus:ring-offset-2 focus:ring-emerald-500 transform active:scale-95"
   >
     <slot>
       {{ props.text }}

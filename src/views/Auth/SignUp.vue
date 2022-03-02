@@ -1,14 +1,18 @@
 <script setup lang="ts">
 import { useAuthStore } from '@/stores/auth'
+import { useLoadingStore } from '@/stores/loading'
 import NProgress from 'nprogress'
 import useAuthValidation from '@/composables/authValidation'
 
 const { errors, email, password, name, validate } = useAuthValidation()
 
+const loadingStore = useLoadingStore()
 const authStore = useAuthStore()
 const router = useRouter()
+const isLoading = computed(() => loadingStore.isLoading)
 
 const formSubmit = function () {
+  loadingStore.setLoading(true)
   validate('signUp')
 
   if (errors.value.length === 0) {
@@ -19,9 +23,11 @@ const formSubmit = function () {
         password: password.value,
       })
       .then(() => {
+        loadingStore.setLoading(false)
         router.push('/login')
       })
       .catch(() => {
+        loadingStore.setLoading(false)
         NProgress.done()
       })
   }
@@ -52,7 +58,10 @@ const formSubmit = function () {
           v-model="password"
           class="mt-6"
         />
-        <BuilderBaseButton type="submit" text="Sign Up" />
+        <BuilderBaseButton type="submit" :disabled="isLoading">
+          <IconMdiLoading v-if="isLoading" class="animate-spin mx-auto text-xl" />
+          <span v-else>Sign Up</span>
+        </BuilderBaseButton>
       </form>
       <BuilderAuthBaseFooter
         text="Already have an account?"
