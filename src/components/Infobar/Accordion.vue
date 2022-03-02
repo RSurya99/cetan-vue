@@ -23,7 +23,7 @@ import { toggleDark } from '@/composables'
         <DisclosurePanel class="pt-4 pb-2 text-sm text-gray-500">
           <ul>
             <li class="px-2 py-3 hover:bg-gray-100 rounded-md">
-              <button type="button" class="flex items-center space-x-2" @click="toggleDark">
+              <button type="button" class="flex items-center space-x-2" @click="toggleDark()">
                 <IconMdiBrightness6 class="text-emerald-500 text-lg" />
                 <span class="text-gray-700 text-sm font-medium">Change Theme</span>
               </button>
