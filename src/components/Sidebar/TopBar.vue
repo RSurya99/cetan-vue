@@ -35,7 +35,7 @@ const logout = function () {
         class="p-2 bg-gray-200 dark:bg-white group hover:bg-emerald-300 dark:hover:bg-emerald-500 rounded-full shadow-sm transition duration-300"
       >
         <IconMdiDotsHorizontal
-          class="text-gray-500 group-hover:text-white text-sm"
+          class="text-gray-500 dark:text-emerald-500 group-hover:text-white text-sm"
           aria-hidden="true"
         />
       </button>
