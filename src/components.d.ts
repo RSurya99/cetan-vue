@@ -35,7 +35,6 @@ declare module 'vue' {
     SidebarChatCard: typeof import('./components/Sidebar/ChatCard.vue')['default']
     SidebarSearchInput: typeof import('./components/Sidebar/SearchInput.vue')['default']
     SidebarTopBar: typeof import('./components/Sidebar/TopBar.vue')['default']
-    SidebarWrapper: typeof import('./components/Sidebar/Wrapper.vue')['default']
   }
 }
 

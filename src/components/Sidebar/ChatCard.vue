@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import { useAuthStore } from '@/stores/auth'
+import { useRoomStore } from '@/stores/room'
 
+const roomStore = useRoomStore()
 const authStore = useAuthStore()
 const props = defineProps({
   room: {
@@ -33,6 +35,12 @@ const lastMessage = computed(() => {
     return ''
   }
 })
+
+const roomClick = function () {
+  roomStore.getSelectedRoom(props.room.room_id).catch((err) => {
+    console.log(err, 'terjadi kesalahan ketika fetch room/id')
+  })
+}
 </script>
 <template>
   <div v-if="props.skeleton" class="w-full flex items-center animate-pulse space-x-2 p-2">
@@ -47,7 +55,7 @@ const lastMessage = computed(() => {
   </div>
   <button
     v-else
-    type="button"
+    @click="roomClick"
     class="w-full flex items-center space-x-2 p-2 text-left dark:bg-emerald-600 dark:hover:bg-emerald-500 hover:bg-emerald-100 rounded-md hover:shadow-sm transition duration-300"
   >
     <img

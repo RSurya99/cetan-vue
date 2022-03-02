@@ -46,6 +46,14 @@ export default {
       },
     })
   },
+  apiGetRoom(id) {
+    const authStore = useAuthStore()
+    return instance.get(`/room/${id}`, {
+      headers: {
+        Authorization: 'Bearer ' + authStore.user.token,
+      },
+    })
+  },
   apiFindUser(event) {
     return instance.post('/search-user', event)
   },
