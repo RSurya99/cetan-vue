@@ -4,6 +4,8 @@ import { useLoadingStore } from '@/stores/loading'
 
 const roomStore = useRoomStore()
 const loadingStore = useLoadingStore()
+const testId = ref(true)
+const roomId = ref(0)
 
 const isLoading = computed(() => loadingStore.isLoading)
 const rooms = computed(() => roomStore.rooms)
@@ -22,6 +24,10 @@ onMounted(() => {
       loadingStore.setLoading(false)
       console.log(err, 'terjadi kesalahan ketika fetch')
     })
+
+  window.Echo.channel('Cetan-app').listen('.message-notification', (e) => {
+    roomStore.getRooms()
+  })
 })
 
 const toggleInfobar = function () {

@@ -3,6 +3,27 @@ import { useRoomStore } from '@/stores/room'
 
 const roomStore = useRoomStore()
 const selectedRoom = computed(() => roomStore.selectedRoom)
+const testId = ref(true)
+const roomId = ref(0)
+
+onMounted(() => {
+  roomStore.getSelectedRoom(selectedRoom.value.room_id)
+  const chatBox = document.getElementById('chat-box')
+  chatBox?.scrollTo(0, chatBox.scrollHeight || document.documentElement.scrollHeight)
+  if (typeof window !== 'undefined') {
+    window.Echo.channel('Cetan-app').listen('.message-notification', (e) => {
+      if (testId.value) {
+        roomId.value = e.id
+        roomStore.getSelectedRoom(selectedRoom.value.room_id)
+        testId.value = false
+        chatBox?.scrollTo(0, chatBox.scrollHeight || document.documentElement.scrollHeight)
+      }
+      if (roomId.value != e.id) {
+        testId.value = true
+      }
+    })
+  }
+})
 </script>
 <template>
   <section
