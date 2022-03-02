@@ -46,4 +46,7 @@ export default {
       },
     })
   },
+  apiFindUser(event) {
+    return instance.post('/search-user', event)
+  },
 }
