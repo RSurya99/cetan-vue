@@ -7,7 +7,7 @@ export default {
 import { useRoomStore } from '@/stores/room'
 
 const roomStore = useRoomStore()
-const selectedRoom = computed(() => roomStore.selectedRoom)
+const selectedRoom = computed(() => roomStore.room)
 const emit = defineEmits(['toggleInfobar'])
 
 const buttonClick = function () {
@@ -17,9 +17,9 @@ const buttonClick = function () {
 <template>
   <div
     class="w-full border-b border-gray-300 px-4 py-2 flex items-center"
-    :class="roomStore.isSelectedRoomEmpty ? 'justify-between' : 'justify-end'"
+    :class="!roomStore.isSelectedRoomEmpty ? 'justify-between' : 'justify-end'"
   >
-    <div class="flex items-center space-x-2" v-if="roomStore.isSelectedRoomEmpty">
+    <div class="flex items-center space-x-2" v-if="!roomStore.isSelectedRoomEmpty">
       <img
         :src="`https://randomuser.me/api/portraits/men/60.jpg`"
         class="w-12 h-12 rounded-full shadow-sm"

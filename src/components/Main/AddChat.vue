@@ -3,8 +3,9 @@ import { useRoomStore } from '@/stores/room'
 
 const roomStore = useRoomStore()
 const message = ref('')
-const room = computed(() => roomStore.selectedRoom)
+const room = computed(() => roomStore.room)
 const sendMessage = function () {
+  roomStore.setRoomClicked(false)
   roomStore
     .sendMessageEvent({
       room_id: room.value.room_id,
@@ -21,7 +22,7 @@ const sendMessage = function () {
 </script>
 <template>
   <section class="w-full h-[10%] px-4 py-2">
-    <div v-if="roomStore.isSelectedRoomEmpty" class="flex items-center justify-between space-x-4">
+    <div v-if="!roomStore.isSelectedRoomEmpty" class="flex items-center justify-between space-x-4">
       <button>
         <IconMdiEmoticonOutline class="text-emerald-500 text-xl" />
       </button>

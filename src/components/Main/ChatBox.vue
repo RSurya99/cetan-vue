@@ -2,21 +2,23 @@
 import { useRoomStore } from '@/stores/room'
 
 const roomStore = useRoomStore()
-const selectedRoom = computed(() => roomStore.selectedRoom)
+const selectedRoom = computed(() => roomStore.room)
 const testId = ref(true)
 const roomId = ref(0)
+const roomClicked = computed(() => roomStore.roomClicked)
 
 onMounted(() => {
   roomStore.getSelectedRoom(selectedRoom.value.room_id)
   if (typeof window !== 'undefined') {
     window.Echo.channel('Cetan-app').listen('.message-notification', (e) => {
-      if (roomId.value != e.id) {
-        console.log('called')
-        roomId.value = e.id
-        roomStore.getSelectedRoom(selectedRoom.value.room_id)
+      if (testId.value) {
+        roomId.value = e.testId
+        if (!roomClicked.value) {
+          roomStore.getSelectedRoom(selectedRoom.value.room_id)
+        }
         testId.value = false
       } else {
-        if (testId.value) {
+        if (roomId.value != e.id) {
           testId.value = true
         }
       }
@@ -28,9 +30,9 @@ onMounted(() => {
   <section
     id="chat-box"
     class="relative w-full bg-gray-100 dark:bg-gray-700 p-4 overflow-auto"
-    :class="roomStore.isSelectedRoomEmpty ? 'h-[80vh]' : 'h-[82vh]'"
+    :class="!roomStore.isSelectedRoomEmpty ? 'h-[80vh]' : 'h-[82vh]'"
   >
-    <div v-if="roomStore.isSelectedRoomEmpty" class="space-y-2">
+    <div v-if="!roomStore.isSelectedRoomEmpty" class="space-y-2">
       <MainChatBoxMessage
         v-for="message in selectedRoom.messages"
         :key="message.id"

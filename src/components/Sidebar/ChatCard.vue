@@ -37,9 +37,15 @@ const lastMessage = computed(() => {
 })
 
 const roomClick = function () {
-  roomStore.getSelectedRoom(props.room.room_id).catch((err) => {
-    console.log(err, 'terjadi kesalahan ketika fetch room/id')
-  })
+  roomStore.setRoomClicked(true)
+  roomStore
+    .getSelectedRoom(props.room.room_id)
+    .then(() => {
+      roomStore.setRoomClicked(false)
+    })
+    .catch((err) => {
+      console.log(err, 'terjadi kesalahan ketika fetch room/id')
+    })
 }
 </script>
 <template>
