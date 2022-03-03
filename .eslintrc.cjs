@@ -8,9 +8,16 @@ module.exports = {
     'eslint:recommended',
     '@vue/eslint-config-typescript/recommended',
     '@vue/eslint-config-prettier',
+    './.eslintrc-auto-import.json',
   ],
   env: {
     'vue/setup-compiler-macros': true,
     node: true,
   },
+  overrides: [
+    {
+      files: ['cypress/integration/**.spec.{js,ts,jsx,tsx}'],
+      extends: ['plugin:cypress/recommended'],
+    },
+  ],
 }

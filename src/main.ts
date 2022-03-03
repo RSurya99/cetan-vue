@@ -1,12 +1,13 @@
 import { createApp } from 'vue'
+import { createPinia } from 'pinia'
+
 import App from './App.vue'
 import router from './router'
-import store from './store'
 
 // css
-import './assets/css/app.scss'
+import './assets/sass/app.scss'
 import './assets/css/vendor.css'
-import 'nprogress/nprogress.css'
+
 import Echo from 'laravel-echo'
 import Pusher from 'pusher-js'
 
@@ -17,4 +18,9 @@ window.Echo = new Echo({
   forceTLS: true,
 })
 
-createApp(App).use(router).use(store).mount('#app')
+const app = createApp(App)
+
+app.use(createPinia())
+app.use(router)
+
+app.mount('#app')
