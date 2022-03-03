@@ -5,7 +5,6 @@ const roomStore = useRoomStore()
 const message = ref('')
 const room = computed(() => roomStore.room)
 const sendMessage = function () {
-  roomStore.setRoomClicked(false)
   roomStore
     .sendMessageEvent({
       room_id: room.value.room_id,

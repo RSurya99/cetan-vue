@@ -8,21 +8,28 @@ const roomId = ref(0)
 const roomClicked = computed(() => roomStore.roomClicked)
 
 onMounted(() => {
-  roomStore.getSelectedRoom(selectedRoom.value.room_id)
-  if (typeof window !== 'undefined') {
-    window.Echo.channel('Cetan-app').listen('.message-notification', (e) => {
-      if (testId.value) {
-        roomId.value = e.testId
-        if (!roomClicked.value) {
-          roomStore.getSelectedRoom(selectedRoom.value.room_id)
+  if (!roomClicked.value) {
+    roomStore.getSelectedRoom(selectedRoom.value.room_id)
+    if (typeof window !== 'undefined') {
+      window.Echo.channel('Cetan-app').listen('.message-notification', (e) => {
+        if (testId.value) {
+          console.log('called in chatbox', roomClicked.value)
+          roomId.value = e.testId
+          if (e && e != undefined) {
+            // console.log('socket received', e);
+            // console.log(e.to, data.self?.id);
+            if (e.to === selectedRoom.value.self?.id && e.room === selectedRoom.value.room_id) {
+              roomStore.getSelectedRoom(selectedRoom.value.room_id)
+            }
+          }
+          testId.value = false
+        } else {
+          if (roomId.value != e.id) {
+            testId.value = true
+          }
         }
-        testId.value = false
-      } else {
-        if (roomId.value != e.id) {
-          testId.value = true
-        }
-      }
-    })
+      })
+    }
   }
 })
 </script>

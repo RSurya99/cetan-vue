@@ -12,6 +12,7 @@ const rooms = computed(() => roomStore.rooms)
 const roomsLength = computed(() =>
   rooms.value.length > 0 || !isLoading.value ? rooms.value.length : 6
 )
+const roomClicked = computed(() => roomStore.roomClicked)
 const infobar = ref(true)
 onBeforeMount(() => loadingStore.setLoading(true))
 onMounted(() => {
@@ -29,7 +30,9 @@ onMounted(() => {
     if (testId.value) {
       console.log('called in sidebar listen')
       roomId.value = e.id
-      roomStore.getRooms()
+      if (!roomClicked.value) {
+        roomStore.getRooms()
+      }
       testId.value = false
     } else {
       if (roomId.value != e.id) {
