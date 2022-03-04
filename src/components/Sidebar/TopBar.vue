@@ -27,7 +27,7 @@ const logout = function () {
         :src="`https://randomuser.me/api/portraits/men/${user.id}.jpg`"
         class="w-10 h-10 rounded-full shadow-sm"
       />
-      <h2 class="text-2xl font-bold text-emerald-500 dark:text-white">Cetan</h2>
+      <h2 class="text-2xl font-bold text-emerald-500 dark:text-white">{{ user.name }}</h2>
     </div>
     <div class="relative">
       <button

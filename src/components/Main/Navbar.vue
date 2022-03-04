@@ -21,7 +21,7 @@ const buttonClick = function () {
   >
     <div class="flex items-center space-x-2" v-if="!roomStore.isSelectedRoomEmpty">
       <img
-        :src="`https://randomuser.me/api/portraits/men/60.jpg`"
+        :src="`https://randomuser.me/api/portraits/men/${selectedRoom.opponent.id}.jpg`"
         class="w-12 h-12 rounded-full shadow-sm"
       />
       <div class="flex flex-col">

@@ -17,7 +17,7 @@ const props = defineProps({
   >
     <div class="relative cursor-default flex items-center">
       <span
-        v-if="props.message.from != userId"
+        v-if="props.message.from === userId"
         class="mr-1 text-xs text-gray-500 dark:text-gray-100"
         >{{ props.message.created_at }}</span
       >
@@ -25,7 +25,7 @@ const props = defineProps({
         <p class="text-gray-700 dark:text-white leading-tight">{{ props.message.message }}</p>
       </div>
       <span
-        v-if="props.message.from === userId"
+        v-if="props.message.from != userId"
         class="ml-1 text-xs text-gray-500 dark:text-gray-100"
         >{{ props.message.created_at }}</span
       >

@@ -65,7 +65,7 @@ const roomClick = function () {
     class="w-full flex items-center space-x-2 p-2 text-left dark:bg-emerald-600 dark:hover:bg-emerald-500 hover:bg-emerald-100 rounded-md hover:shadow-sm transition duration-300"
   >
     <img
-      :src="`https://randomuser.me/api/portraits/men/${props.room.room_id}.jpg`"
+      :src="`https://randomuser.me/api/portraits/men/${props.room.opponent.id}.jpg`"
       class="w-12 h-12 rounded-full shadow dark:shadow-gray-500"
     />
     <div class="grow space-y-1">

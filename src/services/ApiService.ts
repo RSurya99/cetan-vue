@@ -3,8 +3,11 @@ import NProgress from 'nprogress'
 import { useAuthStore } from '@/stores/auth'
 
 const instance = axios.create({
-  baseURL: 'https://api-cetan.herokuapp.com/api',
+  baseURL: import.meta.env.VITE_API_BASEURL,
   timeout: 10000,
+  headers: {
+    'Access-Control-Allow-Origin': '*',
+  },
 })
 
 instance.interceptors.request.use((config) => {
